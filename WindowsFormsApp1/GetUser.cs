@@ -55,34 +55,43 @@ namespace WindowsFormsApp1
 
 		public void GetCountryByIP(string ipAddress)
 		{
-			string ipResponse = IPRequestHelper("http://ip-api.com/xml/" + ipAddress);
-			using (TextReader sr = new StringReader(ipResponse))
-			{
-				using (System.Data.DataSet dataBase = new System.Data.DataSet())
+			try {
+
+				string ipResponse = IPRequestHelper("http://ip-api.com/xml/" + ipAddress);
+				using (TextReader sr = new StringReader(ipResponse))
 				{
-					IpProperties ipProperties = new IpProperties();
-					dataBase.ReadXml(sr);
-					listBox1.Items.Clear();
-					listBox1.Items.Add("Status: " + (ipProperties.Status = dataBase.Tables[0].Rows[0][0].ToString()));
-					listBox1.Items.Add("Country: " + (ipProperties.Country = dataBase.Tables[0].Rows[0][1].ToString()));
-					listBox1.Items.Add("CountryCode: " + (ipProperties.CountryCode = dataBase.Tables[0].Rows[0][2].ToString()));
-					listBox1.Items.Add("Region: " + (ipProperties.Region = dataBase.Tables[0].Rows[0][3].ToString()));
-					listBox1.Items.Add("RegionName: " + (ipProperties.RegionName = dataBase.Tables[0].Rows[0][4].ToString()));
-					listBox1.Items.Add("City: " + (ipProperties.City = dataBase.Tables[0].Rows[0][5].ToString()));
-					listBox1.Items.Add("ZIP: " + (ipProperties.Zip = dataBase.Tables[0].Rows[0][6].ToString()));
-					label1.Text = ipProperties.Lat = dataBase.Tables[0].Rows[0][7].ToString();
-					label2.Text = ipProperties.Lon = dataBase.Tables[0].Rows[0][8].ToString();
-					listBox1.Items.Add("LAT: " + (ipProperties.Lat = dataBase.Tables[0].Rows[0][7].ToString()));
-					listBox1.Items.Add("LON: " + (ipProperties.Lon = dataBase.Tables[0].Rows[0][8].ToString()));
-					listBox1.Items.Add("TimerZone: " + (ipProperties.TimeZone = dataBase.Tables[0].Rows[0][9].ToString()));
-					listBox1.Items.Add("ISP: " + (ipProperties.ISP = dataBase.Tables[0].Rows[0][10].ToString()));
-					listBox1.Items.Add("ORG: " + (ipProperties.ORG = dataBase.Tables[0].Rows[0][11].ToString()));
-					listBox1.Items.Add("AS: " + (ipProperties.AS = dataBase.Tables[0].Rows[0][12].ToString()));
-					listBox1.Items.Add("QUERY: " + (ipProperties.Query = dataBase.Tables[0].Rows[0][13].ToString()));
+					using (System.Data.DataSet dataBase = new System.Data.DataSet())
+					{
+						IpProperties ipProperties = new IpProperties();
+						dataBase.ReadXml(sr);
+						listBox1.Items.Clear();
+						listBox1.Items.Add("Status: " + (ipProperties.Status = dataBase.Tables[0].Rows[0][0].ToString()));
+						listBox1.Items.Add("Country: " + (ipProperties.Country = dataBase.Tables[0].Rows[0][1].ToString()));
+						listBox1.Items.Add("CountryCode: " + (ipProperties.CountryCode = dataBase.Tables[0].Rows[0][2].ToString()));
+						listBox1.Items.Add("Region: " + (ipProperties.Region = dataBase.Tables[0].Rows[0][3].ToString()));
+						//listBox1.Items.Add("");
+						listBox1.Items.Add("RegionName: " + (ipProperties.RegionName = dataBase.Tables[0].Rows[0][4].ToString()));
+						listBox1.Items.Add("City: " + (ipProperties.City = dataBase.Tables[0].Rows[0][5].ToString()));
+						listBox1.Items.Add("ZIP: " + (ipProperties.Zip = dataBase.Tables[0].Rows[0][6].ToString()));
+						label1.Text = ipProperties.Lat = dataBase.Tables[0].Rows[0][7].ToString();
+						label2.Text = ipProperties.Lon = dataBase.Tables[0].Rows[0][8].ToString();
+						listBox1.Items.Add("LAT: " + (ipProperties.Lat = dataBase.Tables[0].Rows[0][7].ToString()));
+						listBox1.Items.Add("LON: " + (ipProperties.Lon = dataBase.Tables[0].Rows[0][8].ToString()));
+						listBox1.Items.Add("TimerZone: " + (ipProperties.TimeZone = dataBase.Tables[0].Rows[0][9].ToString()));
+						listBox1.Items.Add("ISP: " + (ipProperties.ISP = dataBase.Tables[0].Rows[0][10].ToString()));
+						listBox1.Items.Add("ORG: " + (ipProperties.ORG = dataBase.Tables[0].Rows[0][11].ToString()));
+						listBox1.Items.Add("AS: " + (ipProperties.AS = dataBase.Tables[0].Rows[0][12].ToString()));
+						listBox1.Items.Add("QUERY: " + (ipProperties.Query = dataBase.Tables[0].Rows[0][13].ToString()));
 
 
 
+
+					}
 				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
 			}
 		}
 	}
